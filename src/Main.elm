@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Browser exposing (Document)
 import Html exposing (Html, div)
+import Html.Attributes exposing (class)
 
 
 init : () -> ( Model, Cmd Msg )
@@ -28,7 +29,7 @@ viewBoard =
 
 viewCard : Html Msg
 viewCard =
-    div [] []
+    div [ class "card" ] []
 
 
 view : Model -> Document Msg
