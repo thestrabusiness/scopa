@@ -1,15 +1,60 @@
 module Main exposing (main)
 
-import Html exposing (Html)
-import Html.Attributes
+import Browser exposing (Document)
+import Html exposing (Html, div)
 
 
-main : Html a
-main =
-    Html.section []
-        [ Html.h1 [] [ Html.text "Minimal Elm + Parcel implementation, deployed to Netlify" ]
-        , Html.p []
-            [ Html.text "Find the source on "
-            , Html.a [ Html.Attributes.href "https://github.com/JoelQ/elm-netlify-parcel" ] [ Html.text "GitHub" ]
+init : () -> ( Model, Cmd Msg )
+init () =
+    ( {}, Cmd.none )
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        NoOp ->
+            ( model, Cmd.none )
+
+
+viewBoard : Html Msg
+viewBoard =
+    div []
+        [ viewCard
+        , viewCard
+        , viewCard
+        , viewCard
+        ]
+
+
+viewCard : Html Msg
+viewCard =
+    div [] []
+
+
+view : Model -> Document Msg
+view model =
+    { title = "Scopa"
+    , body =
+        [ div []
+            [ viewBoard
             ]
         ]
+    }
+
+
+type Msg
+    = NoOp
+
+
+type alias Model =
+    {}
+
+
+main : Program () Model Msg
+main =
+    Browser.document
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = always Sub.none
+        }
